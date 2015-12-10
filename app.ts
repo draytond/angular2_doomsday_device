@@ -7,97 +7,88 @@ import {
     bootstrap,
 } from "angular2/angular2";
 
-class Article {
-    title: string;
-    link: string;
-    votes: number;
+class Target {
+    target: string;
+    population: number;
+    countdown: number;
 
-    constructor(title, link) {
-        this.title = title;
-        this.link = link;
-        this.votes = 0;
+    constructor(target, population) {
+        this.target = target;
+        this.population = population;
+        this.countdown = 0;
     }
 
-    voteUp() {
-        this.votes += 1;
+    delayDestruction() {
+        this.countdown += 1;
         return false;
-    }
-
-    voteDown() {
-        this.votes -= 1;
-        return false;
-    }
-
-    domain() {
-        var link = this.link.split('//')[1];
-        return link.split('/')[0];
     }
 }
 
 @Component({
-    selector: 'reddit-article',
-    inputs: ['article']
+    selector: 'targeted-city',
+    inputs: ['city']
 })
 @View({
     template: `
     <article>
-        <div class="votes">{{ article.votes }}</div>
+        <div class="countdown">{{ city.countdown }}</div>
         <div class="main">
             <h2>
-                <a href="{{ article.link }}">{{ article.title }}</a>
-                <span>({{article.domain()}})</span>
+                {{ city.target }}
+                <span>(Population: {{city.population}})</span>
             </h2>
             <ul>
-                <li><a href (click)='article.voteUp()'>upvote</a></li>
-                <li><a href (click)='article.voteDown()'>downvote</a></li>
+                <li><a href (click)='city.delayDestruction()'>delay destruction</a></li>
             </ul>
         </div>
     </article>
     `
 })
-class RedditArticle {
-    article: Article
+class DoomedCity {
+    city: Target
 }
 
 @Component({
-    selector: 'reddit'
+    selector: 'doomsday-device'
 })
 
 @View({
     template: `
     <section class="new-link">
         <div class="control-group">
-            <div><label for="title">Title:</label></div>
-            <div><input name="title" #newtitle></div>
+            <div><label for="target">Target:</label></div>
+            <div><input name="target" #newtarget></div>
         </div>
         <div class="control-group">
-            <div><label for="link">Link:</label></div>
-            <div><input name="link" #newlink></div>
+            <div><label for="population">Population:</label></div>
+            <div><input name="population" #newpopulation></div>
         </div>
 
-        <button (click)="addArticle(newtitle, newlink)">Submit Link</button>
+        <button (click)="addTarget(newtarget, newpopulation)">Add Target</button>
     </section>
 
-    <reddit-article *ng-for="#article of articles" [article]="article"></reddit-article>
+    <targeted-city *ng-for="#city of targets" [city]="city"></targeted-city>
+    <button class="launch-btn" (click)="addTarget(newtarget, newpopulation)">Launch Missiles</button>
+    <p>Remaining world population:</p>
     `,
 
-    directives: [RedditArticle, NgFor]
+    directives: [DoomedCity, NgFor]
 })
 
-class RedditApp {
-    articles: Array<Article>;
+class DoomsdayDevice {
+    targets: Array<Target>;
 
     constructor() {
-        this.articles = [
-            new Article('article 1', 'http://www.google.com');
-            new Article('article 2', 'http://www.yahoo.com');
+        this.targets = [
+            new Target('New York', 12000000);
+            new Target('Los Angeles', 11000000);
         ];
     }
-    addArticle(title, link) {
-        this.articles.push(new Article(title.value, link.value));
+    addTarget(target, population) {
+        this.targets.push(new Target(target.value, population.value));
         title.value = '';
-        link.value = '';
+        population.value = '';
     }
 }
 
-bootstrap(RedditApp);
+bootstrap(DoomsdayDevice);

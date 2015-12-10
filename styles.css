@@ -2,7 +2,7 @@ body {
   font-family: verdana, arial, helvetica, sans-serif;
 }
 
-reddit-article {
+targeted-city {
   padding: 10px;
 }
 
@@ -14,12 +14,12 @@ article div {
   display: table-cell;
 }
 
-article div.votes {
+article div.countdown {
   width: 50px;
   margin: 0 auto;
   text-align: center;
   vertical-align: middle;
-  background-color: #ddd;
+  background-color: yellow;
   border: 1px solid black;
   border-right: 0;
 }
@@ -65,7 +65,7 @@ section.new-link {
   width: 500px;
   border: 1px solid black;
   padding: 10px;
-  background-color: #cee3f8;
+  background-color: #C32B2B;
 }
 
 div.control-group {
@@ -84,7 +84,16 @@ div.control-group div {
 }
 
 div.control-group input {
-  width: 400px;
+  width: 380px;
   font-size: medium;
   padding: 3px;
+  margin-left: 40px;
+}
+
+.launch-btn {
+  margin: 20px 0 0 80px;
+  font-size: 40px;
+  background-color: red;
+  border-radius: 40px;
+  padding: 20px;
 }
