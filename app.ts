@@ -1,5 +1,3 @@
-/// <reference path="typings/angular2/angular2.d.ts" />
-
 import {
     Component,
     NgFor,
@@ -80,13 +78,13 @@ class DoomsdayDevice {
 
     constructor() {
         this.targets = [
-            new Target('New York', 12000000);
-            new Target('Los Angeles', 11000000);
+            new Target('New York', 12000000),
+            new Target('Los Angeles', 11000000)
         ];
     }
     addTarget(target, population) {
         this.targets.push(new Target(target.value, population.value));
-        title.value = '';
+        target.value = '';
         population.value = '';
     }
 }

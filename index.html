@@ -2,15 +2,18 @@
 <html>
     <head>
         <title>Doomsday Device</title>
-        <script src="vendor/traceur-runtime.js"></script>
-        <script src="vendor/system.js"></script>
-        <script src="vendor/angular2.dev.js"></script>
+        <script src="../node_modules/systemjs/dist/system.src.js"></script>
+        <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+        <script>
+          System.config({
+            packages: {
+            }
+          });
+          System.import('app.js');
+        </script>
         <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
-        <script>
-            System.import('app.js');
-        </script>
         <doomsday-device></doomsday-device>
     </body>
 </html>
