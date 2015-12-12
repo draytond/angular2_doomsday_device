@@ -14,7 +14,6 @@
         "!./node_modules/**/*.ts"
     ],
     "files": [
-        "./app.ts",
-        "./typings/angular2/angular2.d.ts"
+        "./app.ts"
     ]
 }

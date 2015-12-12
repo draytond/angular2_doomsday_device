@@ -8,8 +8,12 @@
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "angular2": "2.0.0-alpha.47",
+    "systemjs": "0.19.2"
+  },
   "devDependencies": {
-    "http-server": "0.8.0",
-    "typescript": "1.6.2"
+    "live-server": "^0.8.2",
+    "typescript": "^1.7"
   }
 }
