@@ -21,8 +21,14 @@ class Target {
         return false;
     }
 
-    countdown() {
+    bringDestruction() {
+        this.countdown -= 1;
+    }
+
+    startCountdown() {
+        console.log('there');
         setInterval(function () {
+            console.log('inside', this);
             this.countdown -= 1;
         }, 1000);
     }
@@ -94,10 +100,12 @@ class DoomsdayDevice {
     }
     launchMissiles() {
         alert('missiles launched!');
-        for (var i = 0; i < this.targets.length; i++) {
-            console.log('targets? ', this.targets[i]);
-            this.targets[i].countdown();
-        }
+        // for (var i = 0; i < this.targets.length; i++) {
+            var targets = this.targets;
+            // console.log(targets[i]);
+            setInterval(function() { targets[1].bringDestruction() }, 1000);
+            setInterval(function() { targets[0].bringDestruction() }, 1000);
+        // }
     }
 }
 
