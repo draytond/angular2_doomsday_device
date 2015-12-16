@@ -13,12 +13,18 @@ class Target {
     constructor(target, population) {
         this.target = target;
         this.population = population;
-        this.countdown = 0;
+        this.countdown = 10;
     }
 
     delayDestruction() {
         this.countdown += 1;
         return false;
+    }
+
+    countdown() {
+        setInterval(function () {
+            this.countdown -= 1;
+        }, 1000);
     }
 }
 
@@ -36,7 +42,7 @@ class Target {
                 <span>(Population: {{city.population}})</span>
             </h2>
             <ul>
-                <li><a href (click)='city.delayDestruction()'>delay destruction</a></li>
+                <li><a href (click)='city.delayDestruction()'>Heroic Act</a></li>
             </ul>
         </div>
     </article>
@@ -66,8 +72,7 @@ class DoomedCity {
     </section>
 
     <targeted-city *ng-for="#city of targets" [city]="city"></targeted-city>
-    <button class="launch-btn" (click)="addTarget(newtarget, newpopulation)">Launch Missiles</button>
-    <p>Remaining world population:</p>
+    <button class="launch-btn" (click)="launchMissiles()">Launch Missiles</button>
     `,
 
     directives: [DoomedCity, NgFor]
@@ -86,6 +91,13 @@ class DoomsdayDevice {
         this.targets.push(new Target(target.value, population.value));
         target.value = '';
         population.value = '';
+    }
+    launchMissiles() {
+        alert('missiles launched!');
+        for (var i = 0; i < this.targets.length; i++) {
+            console.log('targets? ', this.targets[i]);
+            this.targets[i].countdown();
+        }
     }
 }
 
